@@ -1,0 +1,21 @@
+version: '3.4'
+
+services:
+  clientapp:
+    image: ${DOCKER_REGISTRY-}clientapp
+    build:
+      context: .
+      dockerfile: ClientApp/Dockerfile
+
+  restapi:
+    image: ${DOCKER_REGISTRY-}restapi
+    build:
+      context: .
+      dockerfile: RestAPI/Dockerfile
+
+  grpcapi:
+    image: ${DOCKER_REGISTRY-}grpcapi
+    build:
+      context: .
+      dockerfile: GRPCAPI/Dockerfile
+
