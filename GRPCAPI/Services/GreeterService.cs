@@ -1,5 +1,6 @@
 using Grpc.Core;
 using GRPCAPI;
+using System.Xml.Linq;
 
 namespace GRPCAPI.Services
 {
@@ -13,9 +14,11 @@ namespace GRPCAPI.Services
 
         public override Task<HelloReply> SayHello(HelloRequest request, ServerCallContext context)
         {
+
+            _logger.LogInformation("Hello GRPC: {name}", request.Name);
             return Task.FromResult(new HelloReply
             {
-                Message = "Hello GRPC" + request.Name
+                Message = "Hello GRPC: " + request.Name
             });
         }
     }

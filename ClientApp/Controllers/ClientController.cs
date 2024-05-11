@@ -18,7 +18,7 @@ namespace ClientApp.Controllers
         [HttpGet("greet/grpc")]
         public async Task<string> GreetGRPC(string name)
         {
-            using var channel = GrpcChannel.ForAddress("http://grpcapi");
+            using var channel = GrpcChannel.ForAddress("http://grpcapi:8080");
             var client = new Greeter.GreeterClient(channel);
             var reply = await client.SayHelloAsync(
                               new HelloRequest { Name = name });
@@ -31,7 +31,7 @@ namespace ClientApp.Controllers
             using (var client = new HttpClient())
             {
                 var request = new HttpRequestMessage();
-                request.RequestUri = new Uri($"http://restapi/rest/greet?name={name}");
+                request.RequestUri = new Uri($"http://restapi:8080/rest/greet?name={name}");
                 var response = await client.SendAsync(request);
                 string result = await response.Content.ReadAsStringAsync();
                 return result;

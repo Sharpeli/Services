@@ -3,15 +3,14 @@
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 USER app
 WORKDIR /app
-EXPOSE 80
+EXPOSE 8080
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["GRPCAPI/GRPCAPI.csproj", "GRPCAPI/"]
-RUN dotnet restore "./GRPCAPI/./GRPCAPI.csproj"
+COPY ["./GRPCAPI.csproj", "."]
+RUN dotnet restore "./GRPCAPI.csproj"
 COPY . .
-WORKDIR "/src/GRPCAPI"
 RUN dotnet build "./GRPCAPI.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish

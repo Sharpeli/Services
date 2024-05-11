@@ -17,6 +17,7 @@ namespace RestAPI.Controllers
         [HttpGet("greet")]
         public string Greet(string name)
         {
+            _logger.LogInformation("Hello Rest: {name}", name);
             return $"Hello Rest: {name}";
         }
     }
